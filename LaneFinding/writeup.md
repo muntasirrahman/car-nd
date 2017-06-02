@@ -21,11 +21,22 @@ The goals / steps of this project are the following:
 
 My pipeline consisted of 6 steps:
 1. Convert image to gray color
-2. Blur image using Gaussian Blur, to reduce non-significant color changes 
+![Gray Scale](./test_images_output/solidWhiteCurve-gray.png "Gray image")
+
+2. Blur image using Gaussian Blur, to reduce non-significant color changes
+![Image](./test_images_output/solidWhiteCurve-gauss.png "image")
+
 3. Apply Canny filter based on contrast color change
+![Image](./test_images_output/solidWhiteCurve-canny.png "image")
+
 4. Masked some region of images
+![Image](./test_images_output/solidWhiteCurve-canny-masked.png "image")
+
 5. Draw lines on detected lanes, extrapolate it to upper and lower boundaries
+![Image](./test_images_output/solidWhiteCurve-hough.png "image")
+
 6. Render the detected lane lines to initial image, and return it
+![Image](./test_images_output/solidWhiteCurve-rend.png "image")
 
 
 
@@ -53,4 +64,5 @@ A possible improvement is to use different color pallete, that are processed sep
 The center of lane should be determined dynamically, instead of using hard coded ratio/value.
 
 I haven't solve the most difficult part of the challenge, to be able to detect yellow color in light gray road. I am learning to use different color pallete and another approach using opencv API to filter certain colors (yellow, white, etc).
+
 ![Hsu Scale](./test_images_output/hsu-scale.png "HSU Scale")
