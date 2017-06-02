@@ -24,19 +24,19 @@ My pipeline consisted of 6 steps:
 ![Gray Scale](./test_images_output/solidWhiteCurve-gray.png "Gray image")
 
 2. Blur image using Gaussian Blur, to reduce non-significant color changes
-![Image](./test_images_output/solidWhiteCurve-gauss.png =960x540 "image")
+![Image](./test_images_output/solidWhiteCurve-gauss.png =640)
 
 3. Apply Canny filter based on contrast color change
-![Image](./test_images_output/solidWhiteCurve-canny.png =960x540 "image")
+![Image](./test_images_output/solidWhiteCurve-canny.png =640)
 
 4. Masked some region of images
-![Image](./test_images_output/solidWhiteCurve-canny-masked.png =960x540 "image")
+![Image](./test_images_output/solidWhiteCurve-canny-masked.png =640)
 
 5. Draw lines on detected lanes, extrapolate it to upper and lower boundaries
-![Image](./test_images_output/solidWhiteCurve-hough.png =960x540 "image")
+![Image](./test_images_output/solidWhiteCurve-hough.png =640)
 
 6. Render the detected lane lines to initial image, and return it
-![Image](./test_images_output/solidWhiteCurve-rend.png =960x540 "Detected Lanes")
+![Image](./test_images_output/solidWhiteCurve-rend.png =640)
 
 
 
