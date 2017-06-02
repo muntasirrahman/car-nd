@@ -20,12 +20,12 @@ The goals / steps of this project are the following:
 ### 1. Pipeline and The draw_lines() Function.
 
 My pipeline consisted of 6 steps:
-* Convert image to gray color
-* Blur image using Gaussian Blur, to reduce non-significant color changes 
-* Apply Canny filter based on contrast color change
-* Masked some region of images
-* Draw lines on detected lanes, extrapolate it to upper and lower boundaries
-* Render the detected lane lines to initial image, and return it
+1. Convert image to gray color
+2. Blur image using Gaussian Blur, to reduce non-significant color changes 
+3. Apply Canny filter based on contrast color change
+4. Masked some region of images
+5. Draw lines on detected lanes, extrapolate it to upper and lower boundaries
+6. Render the detected lane lines to initial image, and return it
 
 
 
@@ -53,4 +53,4 @@ A possible improvement is to use different color pallete, that are processed sep
 The center of lane should be determined dynamically, instead of using hard coded ratio/value.
 
 I haven't solve the most difficult part of the challenge, to be able to detect yellow color in light gray road. I am learning to use different color pallete and another approach using opencv API to filter certain colors (yellow, white, etc).
-[image1]: ./test_images_output/hsu-scale.png "HSU Scale"
+![Hsu Scale](./test_images_output/hsu-scale.png "HSU Scale")
