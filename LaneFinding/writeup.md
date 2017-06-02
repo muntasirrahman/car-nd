@@ -24,19 +24,19 @@ My pipeline consisted of 6 steps:
 ![Gray Scale](./test_images_output/solidWhiteCurve-gray.png "Gray image")
 
 2. Blur image using Gaussian Blur, to reduce non-significant color changes
-![Image](./test_images_output/solidWhiteCurve-gauss.png "image")
+![Image](./test_images_output/solidWhiteCurve-gauss.png =960x540 "image")
 
 3. Apply Canny filter based on contrast color change
-![Image](./test_images_output/solidWhiteCurve-canny.png "image")
+![Image](./test_images_output/solidWhiteCurve-canny.png =960x540 "image")
 
 4. Masked some region of images
-![Image](./test_images_output/solidWhiteCurve-canny-masked.png "image")
+![Image](./test_images_output/solidWhiteCurve-canny-masked.png =960x540 "image")
 
 5. Draw lines on detected lanes, extrapolate it to upper and lower boundaries
-![Image](./test_images_output/solidWhiteCurve-hough.png "image")
+![Image](./test_images_output/solidWhiteCurve-hough.png =960x540 "image")
 
 6. Render the detected lane lines to initial image, and return it
-![Image](./test_images_output/solidWhiteCurve-rend.png "image")
+![Image](./test_images_output/solidWhiteCurve-rend.png =960x540 "Detected Lanes")
 
 
 
@@ -49,7 +49,6 @@ In order to draw a single line on the left and right lanes, I modified the draw_
 
 
 ### 2. Shortcomings of Current Pipeline
-
 
 Obvious shortcomings would happen when it encounter junction where the lane is not straight. Existing code makes assumption the lane that appears in camera is always  looking straight.
 
