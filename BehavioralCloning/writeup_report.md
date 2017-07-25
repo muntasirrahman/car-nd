@@ -21,8 +21,9 @@ The goals of this project are the following:
 [recovery_from_right_1]: ./examples/recover-from-right1.jpg "Recovery from Right side 1"
 [recovery_from_right_2]: ./examples/recover-from-right2.jpg "Recovery from Right side 2"
 
+
 ## Rubric Points
----
+
 ### File Submission & Code Quality
 
 #### 1. File Submission
@@ -33,6 +34,8 @@ My project includes the following files:
 * model.h5 containing a trained convolution neural network 
 * writeup_report.md summarizing the results
 * video.mp4 video file captured by center camera
+
+A simulator video of autonomous driving is  at youtube http://www.youtube.com/watch?v=zmdRH4WHXh8
 
 [![Simulator Video](http://img.youtube.com/vi/zmdRH4WHXh8/0.jpg)](http://www.youtube.com/watch?v=zmdRH4WHXh8)
 

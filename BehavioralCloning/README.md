@@ -13,6 +13,7 @@ The BehavioralCloning folder has following files:
 * video.mp4 (a video recording of the vehicle driving autonomously)
 
 
+A simulator video of autonomous driving is at youtube http://www.youtube.com/watch?v=zmdRH4WHXh8
 
 ### Dependencies
 This lab requires:
