@@ -115,14 +115,17 @@ The final model architecture (model.py lines 36-52) consisted of following layer
 The network uses Adam optimizer to reduce mean square error.
 
 I tried following approaches at image pre-processing, but it does not work:
-* YUV color scale, it doesn't significantly reduce error loss
-* Add extra steering wheel measurement factor for image from left camera and right camera, but not only it doesn't reduce error, but it also increase  it.
+* YUV color scale, it does not reduce error, does not work. 
+* Adding extra steering wheel measurement factor:
+  * for image from left camera and right camera.
+  * The extra measurement factor increase error.
 
-I add a Dropout layer with rate 0.4 which does work reduce error.
+I add a Dropout layer with rate 0.4 which does reduce error.
 
-I also tried to modify the network
-* Modify the 5th convolution layer, by using 1x1 filter, but it doesn't reduce error.
-* Add a Dropout layer after each fully connected network layer, but it doesn't reduce error rate.  
+I also tried to tune the neural network by:
+* Modify the 5th convolution layer
+  * by using 1x1 filter, but it does not work.
+* Insert a dropout layer, in between each Dense layer, but it does not reduce error rate.  
 
 
 #### 3. Creation of the Training Set & Training Process
@@ -138,16 +141,18 @@ I also recorded backtrack center lane driving. Here is example image of backtrac
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to recover. 
 
 These images show what a recovery looks like starting from left side :
+
 ![Recovery][recovery_from_left_1] ![Recovery][recovery_from_left_2]
 
 These images show what a recovery looks like starting from right side :
+
 ![Recovery][recovery_from_right_1] ![Recovery][recovery_from_right_2]
 
 I also trained/recorded every distinct areas, such red-white road side, bridge, traffic sign, beside lake.
 
-I tried to augment the data, but additional data doesn't improve loss score. So i decided to stick with left camera image, and right camera image.
+I tried to augment the data, but additional data doesn't improve error score, it even increase the error rate. So i decided to stick with left camera image, and right camera image.
 
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. (line 52) 
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 5 as evidenced by loss score 0.054. I used Adam optimizer so that manually training the learning rate wasn't necessary.
+I used the training data for training and validation of the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 5 as evidenced by error rate 0.054. I used Adam optimizer so that manually training the learning rate wasn't necessary.
