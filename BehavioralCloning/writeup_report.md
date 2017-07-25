@@ -13,6 +13,7 @@ The goals of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./examples/placeholder.png "Model Visualization"
+[neural_network]: ./examples/nvidia_neural_network.png "Model Architecture"
 [center_lane_driving]: ./examples/center-lane-driving.jpg "Center Lane Driving"
 [backtrack_driving]: ./examples/backtrack-driving.jpg "Backtract Driving"
 [recovery_from_left_1]: ./examples/recover-from-left1.jpg "Recovery from Left side 1"
@@ -21,8 +22,6 @@ The goals of this project are the following:
 [recovery_from_right_2]: ./examples/recover-from-right2.jpg "Recovery from Right side 2"
 
 ## Rubric Points
-### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
-
 ---
 ### File Submission & Code Quality
 
@@ -33,6 +32,10 @@ My project includes the following files:
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
 * writeup_report.md summarizing the results
+* video.mp4 video file captured by center camera
+
+[![Simulator Video](http://img.youtube.com/vi/zmdRH4WHXh8/0.jpg)](http://www.youtube.com/watch?v=zmdRH4WHXh8)
+
 
 #### 2. Functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
@@ -42,24 +45,28 @@ python drive.py model.h5
 
 #### 3. Usable and readable code
 
-The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
+The model.py file contains the code for training and saving the convolution neural network. The file model.py shows the pipeline I used for training and validating the model, and it contains comments to explain that particular line.
 
 ### Model Architecture and Training Strategy
 
 #### 1. Model architecture
 
 The model based on Nvidia architecture. It comprises of:
-* Lambda layer for data normalization using
-```
-Normalized x = x / 255 - 0.5
-```
-* Cropping2D layer, to crop from 70 pixels from top, 25 pixels from bottom
-* 3 Convolution layers, each with 24, 36, 48 depths, 5x5 filter size, stride 2x2, and RELU activation (code line 39-41)
-* 2 Convolution layers, depths 64,  3x3 filter size, with RELU activation (code line 40-41)
-* Flatten layer
-* Dropout layer with dropout rate 0.4
-* 4 Fully connected layers
 
+| Layer    | Detail      | Remarks |
+|:---------|:-----------:|:--------|
+|Lambda      | ```x/255 - 0.5``` |Data normalization|
+|Cropping2D  |70,25 |to crop road image 70px from top, 25px from bottom|
+|Convolution |24 depth, 5x5 filter,  stride 2x2, and RELU activation|Feature identification|
+|Convolution |36 depth, 5x5 filter,  stride 2x2, and RELU activation|Feature identification| 
+|Convolution |48 depth, 5x5 filter,  stride 2x2, and RELU activation |Feature identification|
+|Convolution |64 depths,  3x3 filter size, with RELU activation|Feature identification|
+| Flatten    |   |  | 
+|Dropout     |rate 0.4|Overfitting prevention|
+|Fully connected |100 neurons| |
+|Fully connected |50 neurons | |
+|Fully connected |10 neurons | |
+|Fully connected |1 neuron   | |
 
 #### 2. Attempts to reduce overfitting in the model
 
@@ -81,65 +88,57 @@ For details about how I created the training data, see the next section.
 
 #### 1. Solution Design Approach
 
-The overall strategy for deriving a model architecture was to add training data from different road side markers, e.g. red-white, fence, soil, shadow, etc.
+The overall strategy for deriving a model architecture was: 
+* by providing useful training data
+  * from different type of road side markers, e.g. red-white, fence, soil, shadow from different type of road side markers, e.g. red-white, fence, soil, shadow
+  * many recovery record from slightly left/right side, from far left, far right road, at every distinctive locations
+* image data pre-processing
+* prevent overfitting
 
-My first step was to use a convolution neural network model based on NVIDIA neural network. I thought this model might be appropriate because NVIDIA has tested it at real car.
-
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
+My first step was to use a convolution neural network model based on NVIDIA neural network. I thought this model works because Nvidia has tested it and it works.
 
 To combat the overfitting, I added a Dropout layer after Flatten layer.
 
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track. To improve the driving behavior in these cases, I recorded some training at distinctive locations. 
-
-I also added many recovery record from slightly left/right side, from far left, far right road, at every distinctive locations.  
+The final step was to run the simulator to see how well the car was driving around track one. At the initial version, there were a few spots where the vehicle fell off the track. To fix these cases, I recorded some training data from those spots.
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
 #### 2. Final Model Architecture
 
 The final model architecture (model.py lines 36-52) consisted of following layers and layer sizes:
-* Cropping2D layer: to crop from 70 pixels from top, 25 pixels from bottom
-* Convolution layer: 24 depth, 5x5 filter size,  stride 2x2, and RELU activation 
-* Convolution layers: 36 depth, 5x5 filter size,  stride 2x2, and RELU activation 
-* Convolution layers: 48 depth, 5x5 filter size,  stride 2x2, and RELU activation 
-* Convolution layers: 64 depths,  3x3 filter size, with RELU activation
-* Flatten layer
-* Dropout layer with dropout rate 0.4
-* Fully connected layer 100 neurons
-* Fully connected layer 50 neurons
-* Fully connected layer 10 neurons
-* Fully connected layer 1 neuron
+![alt text][neural_network]
 
-The network uses Adam optimizer with target to reduce mean square error.
 
-I tried following approaches at image pre-processing, that don't work: 
+The network uses Adam optimizer to reduce mean square error.
+
+I tried following approaches at image pre-processing, but it does not work:
 * YUV color scale, it doesn't significantly reduce error loss
 * Add extra steering wheel measurement factor for image from left camera and right camera, but not only it doesn't reduce error, but it also increase  it.
-* Modify the 5th convolution layer, by using 1x1 filter, but it doesn't reduce error loss.
-* Add a Dropout layer after each fully connected network layer, but it doesn't reduce error rate.  
 
-Layer that reduce error rate are:
-* Cropping2D
-* Flatten
+I add a Dropout layer with rate 0.4 which does work reduce error.
+
+I also tried to modify the network
+* Modify the 5th convolution layer, by using 1x1 filter, but it doesn't reduce error.
+* Add a Dropout layer after each fully connected network layer, but it doesn't reduce error rate.  
 
 
 #### 3. Creation of the Training Set & Training Process
 
 To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
 
-![alt text][center_lane_driving]
+![Center lane driving][center_lane_driving]
 
 I also recorded backtrack center lane driving. Here is example image of backtrack center lane driving:
 
-![alt text][backtrack_driving]
+![Backtrack driving][backtrack_driving]
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to recover. 
 
 These images show what a recovery looks like starting from left side :
-![alt text][recovery_from_left_1] ![alt text][recovery_from_left_2]
+![Recovery][recovery_from_left_1] ![Recovery][recovery_from_left_2]
 
 These images show what a recovery looks like starting from right side :
-![alt text][recovery_from_right_1] ![alt text][recovery_from_right_2]
+![Recovery][recovery_from_right_1] ![Recovery][recovery_from_right_2]
 
 I also trained/recorded every distinct areas, such red-white road side, bridge, traffic sign, beside lake.
 
