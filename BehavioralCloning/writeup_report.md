@@ -33,7 +33,9 @@ My project includes the following files:
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
 * writeup_report.md summarizing the results
+* README.md a duplicate of writeup_report.md because the project's Rubrik requires README file to explain things in details.
 * video.mp4 video file captured by center camera
+* video.py, an utility by Udacity to create video from series of captured image
 
 A simulator video of autonomous driving is  at youtube http://www.youtube.com/watch?v=zmdRH4WHXh8
 
