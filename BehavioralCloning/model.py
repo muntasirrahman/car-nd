@@ -1,5 +1,5 @@
 import csv
-import cv2
+import matplotlib.image as mpimg
 import numpy as np
 
 #Loading lines from log file
@@ -21,7 +21,7 @@ for line in lines:
         filename = source_path.split('/')[-1]
         current_path = 'training/IMG/' + filename
 
-        image = cv2.imread(current_path)
+        image = mpimg.imread(current_path)
         images.append(image)
 
         measurements.append(measurement)
