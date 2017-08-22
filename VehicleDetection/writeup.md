@@ -12,11 +12,11 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 [image1]: ./output_images/img_car_notcar.png
 [image2]: ./output_images/img_hog_explore.png
-[image3]: ./examples/sliding_windows.jpg
-[image4]: ./examples/sliding_window.jpg
-[image5]: ./examples/bboxes_and_heat.png
-[image6]: ./examples/labels_map.png
-[image7]: ./examples/output_bboxes.png
+[image3]: ./output_images/sliding_windows.jpg
+[image4]: ./output_images/sliding_window.jpg
+[image5]: ./output_images/bboxes_and_heat.png
+[image6]: ./output_images/labels_map.png
+[image7]: ./output_images/output_bboxes.png
 [video1]: ./project_video_output.mp4
 
 #### Code from Udacity Self Driving Car's Vehicle Detection lesson are in at udacity.py file 
@@ -81,9 +81,7 @@ Here's a [link to my video result](./project_video_output.mp4)
 
 ####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
-
-Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
+The false positive detection still there, frankly i am not sure about the effective way to filter it.
 
 ### Here are six frames and their corresponding heatmaps:
 
@@ -103,5 +101,5 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 ####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+As of now, there are a lot of false positive finding.
 
